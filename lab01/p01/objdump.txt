@@ -9,12 +9,12 @@ Disassembly of section .text:
 
 using namespace std;
 
-int main()
-{
+int main() 
+{   
    0:	f3 0f 1e fa          	endbr64 
    4:	55                   	push   %rbp
    5:	48 89 e5             	mov    %rsp,%rbp
-    cout << "Hello, C++ " << __cplusplus << "!\n";
+    #ifdef AUCA_DEBUG
    8:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # f <main+0xf>
    f:	48 89 c6             	mov    %rax,%rsi
   12:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # 19 <main+0x19>
@@ -28,6 +28,7 @@ int main()
   38:	48 89 c6             	mov    %rax,%rsi
   3b:	48 89 d7             	mov    %rdx,%rdi
   3e:	e8 00 00 00 00       	call   43 <main+0x43>
+        cout << "author: Aziza Sydykova\n";
   43:	b8 00 00 00 00       	mov    $0x0,%eax
   48:	5d                   	pop    %rbp
   49:	c3                   	ret    
