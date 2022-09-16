@@ -2,7 +2,10 @@
 
 using namespace std;
 
-int main()
-{
-    cout << "Hello, C++ " << __cplusplus << "!\n";
+int main() 
+{   
+    #ifdef AUCA_DEBUG
+        cout << "author: Aziza Sydykova\n";
+    #endif
+        cout << "Hello, C++ " << __cplusplus << "!\n";
 }
