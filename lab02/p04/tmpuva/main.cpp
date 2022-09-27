@@ -8,7 +8,6 @@ using namespace std;
 int main()
 {
     iostream::sync_with_stdio(false);
-
     int testCases, n;
     cin >> testCases;
     for (int i = 0; i < testCases; i++)
