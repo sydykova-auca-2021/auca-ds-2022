@@ -11,8 +11,8 @@ int main()
 
     for (int b, n; cin >> b >> n && b != 0 && n != 0;) {
         vector<int> banks;
-        bool canPay = false;
-
+        bool canPay = true;
+        
         for (int i = 0; i < b; i++) {
             int money;
             cin >> money;
@@ -29,7 +29,7 @@ int main()
 
         for (int i = 0; i < b; i++) {
             if (banks[i] < 0) {
-                canPay = true;
+                canPay = false;
             }
         }
 
