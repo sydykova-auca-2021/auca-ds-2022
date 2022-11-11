@@ -15,10 +15,23 @@ TEST_CASE("Default constructor")
     REQUIRE(sout.str() == "0");
 
     vector<BigInt> v(10);
-    for(const auto &e : v)
+    for (const auto &e : v)
     {
         ostringstream sout2;
         sout2 << e;
         REQUIRE(sout2.str() == "0");
     }
+};
+
+TEST_CASE("Constructor with a string parameter")
+{
+    ostringstream sout;
+
+    SUBCASE("Just long correct positive number")
+    {
+        BigInt x("123123123");
+        sout << x;
+        REQUIRE(sout.str() == "123123123");
+    }
+
 };
