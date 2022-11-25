@@ -86,3 +86,14 @@ TEST_CASE("Constructor with a string parameter")
         REQUIRE_THROWS_AS(BigInt("123 456"), runtime_error);
     }
 }
+
+TEST_CASE("Constructor with int parameter")
+{
+    ostringstream sout;
+    SUBCASE("positive int")
+    {
+        BigInt x(12345);
+        sout << x;
+        REQUIRE(sout.str() == "12345");
+    }
+}
