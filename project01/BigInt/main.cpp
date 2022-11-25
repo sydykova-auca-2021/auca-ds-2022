@@ -97,3 +97,163 @@ TEST_CASE("Constructor with int parameter")
         REQUIRE(sout.str() == "12345");
     }
 }
+
+TEST_CASE("Comparison operators")
+{
+    SUBCASE("less than")
+    {
+        SUBCASE("positive")
+        {
+            SUBCASE("equal to each other")
+            {
+                BigInt a("123456");
+                BigInt b("123456");
+                REQUIRE(!(a < b));
+            }
+            SUBCASE("a less than b")
+            {
+                BigInt a("9423");
+                BigInt b("123456");
+                REQUIRE(a < b);
+            }
+            SUBCASE("b less than a")
+            {
+                BigInt a("123456");
+                BigInt b("19231");
+                REQUIRE(!(a < b));
+            }
+        }
+        SUBCASE("negative")
+        {
+            SUBCASE("equal to each other")
+            {
+                BigInt a("-123456");
+                BigInt b("-123456");
+                REQUIRE(!(a < b));
+            }
+            SUBCASE("a less than b")
+            {
+                BigInt a("-94235443244");
+                BigInt b("-123456");
+                REQUIRE(a < b);
+            }
+            SUBCASE("b less than a")
+            {
+                BigInt a("-84324234324");
+                BigInt b("-94235443244");
+                REQUIRE(!(a < b));
+            }
+        }
+    }
+    SUBCASE("more than")
+    {
+        SUBCASE("positive")
+        {
+            SUBCASE("equal to each other")
+            {
+                BigInt a("123456");
+                BigInt b("123456");
+                REQUIRE(!(a < b));
+            }
+            SUBCASE("a more than b")
+            {
+                BigInt a("123456");
+                BigInt b("9423");
+                REQUIRE(a > b);
+            }
+            SUBCASE("b more than a")
+            {
+                BigInt a("19231");
+                BigInt b("123456");
+                REQUIRE(!(a > b));
+            }
+        }
+        SUBCASE("negative")
+        {
+            SUBCASE("equal to each other")
+            {
+                BigInt a("-123456");
+                BigInt b("-123456");
+                REQUIRE(!(a > b));
+            }
+            SUBCASE("a more than b")
+            {
+                BigInt b("-94235443244");
+                BigInt a("-123456");
+                REQUIRE(a > b);
+            }
+            SUBCASE("b more than a")
+            {
+                BigInt a("-8");
+                BigInt b("-7");
+                REQUIRE(a < b);
+            }
+        }
+    }
+}
+
+TEST_CASE("operators <= && >=")
+{
+    SUBCASE("a <= b")
+    {
+        SUBCASE("#1")
+        {
+            ostringstream sout;
+            BigInt a("300");
+            BigInt b("300");
+            REQUIRE(a <= b);
+        }
+        SUBCASE("#2")
+        {
+            ostringstream sout;
+            BigInt a("299");
+            BigInt b("300");
+            REQUIRE(a <= b);
+        }
+        SUBCASE("#3")
+        {
+            ostringstream sout;
+            BigInt a("-300");
+            BigInt b("300");
+            REQUIRE(a <= b);
+        }
+        // SUBCASE("#4")
+        // {
+        //     ostringstream sout;
+        //     BigInt a("-301");
+        //     BigInt b("-300");
+        //     REQUIRE(a < b);
+        // }
+    }
+    SUBCASE("a >= b")
+    {
+        SUBCASE("#1")
+        {
+            ostringstream sout;
+            BigInt a("300");
+            BigInt b("300");
+            REQUIRE(a >= b);
+        }
+        SUBCASE("#2")
+        {
+            ostringstream sout;
+            BigInt a("300");
+            BigInt b("299");
+            REQUIRE(a >= b);
+        }
+        SUBCASE("#3")
+        {
+            ostringstream sout;
+            BigInt a("300");
+            BigInt b("-300");
+            REQUIRE(a >= b);
+        }
+        // SUBCASE("#4")
+        // {
+        //     ostringstream sout;
+        //     BigInt a("-300");
+        //     BigInt b("-301");
+        //     REQUIRE(a > b);
+        //}
+    }
+}

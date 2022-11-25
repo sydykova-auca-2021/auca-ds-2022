@@ -13,7 +13,11 @@ class BigInt
     friend std::istream &operator>>(std::istream &inp, BigInt &x);
     friend bool operator==(const BigInt &x, const BigInt &y);
     friend bool operator!=(const BigInt &a, const BigInt &b);
-
+    friend bool operator>(const BigInt &a, const BigInt &b);
+    friend bool operator<(const BigInt &a, const BigInt &b);
+    friend bool operator<=(const BigInt &a, const BigInt &b);
+    friend bool operator>=(const BigInt &a, const BigInt &b);
+    
     std::vector<int> mDigits;
     bool mIsNegative;
 
@@ -169,4 +173,159 @@ inline bool operator!=(const BigInt &a, const BigInt &b)
         y += c;
     }
     return x != y;
+}
+
+inline bool operator>(const BigInt &a, const BigInt &b)
+{
+    if (!a.mIsNegative && b.mIsNegative)
+    {
+        return true;
+    }
+    else if (a.mIsNegative && !b.mIsNegative)
+    {
+        return false;
+    }
+    else
+    {
+        if (!a.mIsNegative && !b.mIsNegative)
+        {
+            if (a.mDigits.size() > b.mDigits.size())
+                return true;
+            else if (a.mDigits.size() == b.mDigits.size())
+            {
+                bool eq = true;
+                for (int i = 0; i < (int)a.mDigits.size(); i++)
+                {
+                    if (a.mDigits[i] > b.mDigits[i])
+                    {
+                        return true;
+                    }
+                    else if (a.mDigits[i] < b.mDigits[i])
+                    {
+                        return false;
+                    }
+                }
+                return !eq;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if (a.mDigits.size() > b.mDigits.size())
+            return true;
+            
+            else if (a.mDigits.size() == b.mDigits.size())
+            {
+                bool eq = true;
+                for (int i = 0; i < (int)a.mDigits.size(); i++)
+                {
+                    if (a.mDigits[i] > b.mDigits[i])
+                    {
+                        return true;
+                    }
+                    else if (a.mDigits[i] < b.mDigits[i])
+                    {
+                        return false;
+                    }
+                }
+                return !eq;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
+}
+
+inline bool operator<(const BigInt &a, const BigInt &b)
+{
+    if (a.mIsNegative && !b.mIsNegative)
+    {
+        return true;
+    }
+    else if (!a.mIsNegative && b.mIsNegative)
+    {
+        return false;
+    }
+    
+    else 
+    {
+        if (!a.mIsNegative && !b.mIsNegative)
+        {
+            if (a.mDigits.size() < b.mDigits.size())
+                return true;
+            else if (a.mDigits.size() == b.mDigits.size())
+            {
+                bool eq = true;
+                for (int i = 0; i < (int)a.mDigits.size(); i++)
+                {
+                    if (a.mDigits[i] < b.mDigits[i])
+                    {
+                        return true;
+                    }
+                    else if (a.mDigits[i] > b.mDigits[i])
+                    {
+                        return false;
+                    }
+                }
+                return !eq;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if (a.mDigits.size() < b.mDigits.size())
+                return false;
+            else if (a.mDigits.size() == b.mDigits.size())
+            {
+                bool eq = true;
+                for (int i = 0; i < (int)a.mDigits.size(); i++)
+                {
+                    if (a.mDigits[i] < b.mDigits[i])
+                    {
+                        return false;
+                    }
+                    else if (a.mDigits[i] > b.mDigits[i])
+                    {
+                        return true;
+                    }
+                }
+                return !eq;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
+}
+
+inline bool operator<=(const BigInt &a, const BigInt &b)
+{
+    if(a.mIsNegative <= b.mIsNegative)
+    {
+        return a.mDigits <= b.mDigits;
+    }
+    if(!a.mIsNegative <= !b.mIsNegative)
+    {
+        return a.mDigits <= b.mDigits;
+    }
+}
+inline bool operator>=(const BigInt &a, const BigInt &b)
+{
+    if(a.mIsNegative >= b.mIsNegative)
+    {
+        return a.mDigits >= b.mDigits;
+    }
+    if(!a.mIsNegative >= !b.mIsNegative)
+    {
+        return a.mDigits >= b.mDigits;
+    }
 }
