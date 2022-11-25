@@ -11,7 +11,8 @@ class BigInt
 {
     friend std::ostream &operator<<(std::ostream &out, const BigInt &x);
     friend std::istream &operator>>(std::istream &inp, BigInt &x);
-
+    friend bool operator==(const BigInt &x, const BigInt &y);
+    
     std::vector<int> mDigits;
     bool mIsNegative;
 
@@ -148,4 +149,9 @@ inline std::istream &operator>>(std::istream &inp, BigInt &x)
     }
     x = BigInt(s);
     return inp;
+}
+
+inline bool operator==(const BigInt &x, const BigInt &y)
+{
+    return x.mIsNegative == y.mIsNegative && x.mDigits == y.mDigits;
 }
